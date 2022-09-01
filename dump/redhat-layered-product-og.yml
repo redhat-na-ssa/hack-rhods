@@ -1,0 +1,9 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: KfDef.v1.kfdef.apps.kubeflow.org
+  name: redhat-layered-product-og
+  namespace: redhat-ods-operator
+spec:
+  upgradeStrategy: Default
