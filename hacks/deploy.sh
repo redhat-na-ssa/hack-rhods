@@ -140,20 +140,15 @@ if [ $infrastructure = "AWS" ]; then
       exit 1
     fi
   done
-elif [ $infrastructure = "OpenStack" ]; then
-  # On PSI, deploy local
-  echo "INFO: Deploying on PSI. Creating local database"
+else
+  # deploy local
+  echo "INFO: Creating local database"
   ODH_MANIFESTS="opendatahub.yaml"
 
   # Create Postgres Secret
   export jupyterhub_postgresql_password=$(openssl rand -hex 32)
   sed -i "s/<jupyterhub_postgresql_password>/$jupyterhub_postgresql_password/g" jupyterhub/jupyterhub-database-password.yaml
   oc create -n ${ODH_PROJECT} -f jupyterhub/jupyterhub-database-password.yaml || echo "INFO: Jupyterhub Password already exist."
-else
-  # NOTE: NO! - The alternative should be to deploy postgres, locally NOT FAIL! - COME ON!
-  # Not on PSI or AWS, Fail Installation
-  echo "ERROR: Deploying on $infrastructure, which is not supported. Failing Installation"
-  exit 1
 fi
 
 oc apply -n ${ODH_PROJECT} -f rhods-dashboard.yaml
@@ -186,6 +181,7 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+sre_junk() {
 deadmanssnitch=$(oc::wait::object::availability "oc get secret -n $ODH_MONITORING_PROJECT redhat-rhods-deadmanssnitch -o jsonpath='{.data.SNITCH_URL}'" 4 90 | tr -d "'"  | base64 --decode)
 
 if [ -z "$deadmanssnitch" ];then
@@ -276,6 +272,8 @@ then
 else
   echo "Cluster is not for RHODS engineering or test purposes."
 fi
+
+}
 
 oc apply -n $ODH_MONITORING_PROJECT -f monitoring/prometheus/prometheus-configs.yaml
 
