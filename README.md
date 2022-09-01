@@ -7,6 +7,7 @@ A: ...
 
 ## Quickstart
 
+Note: Repeat commands if you see errors
 ```
 oc apply -f k8s
 oc apply -k components/operators/rhods/operator/overlays/beta
@@ -14,18 +15,24 @@ oc apply -k components/operators/rhods/operator/overlays/beta
 
 ## Hacks
 
-"Fix" the operator
+Make RHODS hybrid cloud ready - run on any OCP
 ```
-mkdir generated
+[ ! -e generated ] && mkdir generated
 
+# create our patched deploy script for the rhods operator
 oc --dry-run=client -o yaml \
   -n redhat-ods-operator \
-  create configmap fix-deploy \
+  create configmap hack-rhods-deployer \
   --from-file hacks/deploy.sh \
-  > generated/fix-deploy-cm.yaml
+  > generated/hack-rhods-deployer-cm.yaml
 
-oc apply -f generated/fix-deploy-cm.yaml 
+# create a modified operator that uses our script
+oc apply -f generated/hack-rhods-deployer-cm.yaml 
 
+# check maximum effort
+diff -u dump/deployer/deploy.sh hacks/deploy.sh
+
+# Success!!!1
 ```
 
 ## Comments
