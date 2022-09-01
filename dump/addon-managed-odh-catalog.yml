@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: addon-managed-odh-catalog
+  namespace: redhat-ods-operator
+  # namespace: openshift-marketplace
+spec:
+  displayName: Red Hat OpenShift Data Science
+  publisher: OSD Red Hat Addons
+  # image: 'quay.io/modh/qe-catalog-source:v1100-12'
+  # image: quay.io/osd-addons/rhods-index@sha256:808380c3b4cabf8c83680e4e1b61e3570865decbf78085021fd8b1d07bcc9c7b
+  image: 'quay.io/modh/qe-catalog-source:latest'
+  
+  sourceType: grpc
