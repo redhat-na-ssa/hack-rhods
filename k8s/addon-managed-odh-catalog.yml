@@ -7,8 +7,8 @@ metadata:
 spec:
   displayName: Red Hat OpenShift Data Science
   publisher: OSD Red Hat Addons
+  # image: 'quay.io/modh/qe-catalog-source:latest'
   # image: 'quay.io/modh/qe-catalog-source:v1100-12'
-  # image: quay.io/osd-addons/rhods-index@sha256:808380c3b4cabf8c83680e4e1b61e3570865decbf78085021fd8b1d07bcc9c7b
-  image: 'quay.io/modh/qe-catalog-source:latest'
+  image: 'quay.io/modh/qe-catalog-source:v1.15.0-10'
   
   sourceType: grpc

@@ -33,7 +33,7 @@ oc apply -f generated/hack-rhods-deployer-cm.yaml
 oc apply -f k8s
 
 # check maximum effort
-diff -u dump/deployer/deploy.sh hacks/deploy.sh
+diff -u dump/deployer-v1.15.0-10/sdeploy.sh hacks/deploy.sh
 
 # Success!!!1
 ```
@@ -47,3 +47,4 @@ diff -u dump/deployer/deploy.sh hacks/deploy.sh
 
 ## Links
 - [GitHub - RHODS Operator](https://github.com/red-hat-data-services/opendatahub-operator)
+- [GitHub - RHODS Deployer](https://github.com/red-hat-data-services/odh-deployer)
