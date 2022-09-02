@@ -27,7 +27,10 @@ oc --dry-run=client -o yaml \
   > generated/hack-rhods-deployer-cm.yaml
 
 # create a modified operator that uses our script
-oc apply -f generated/hack-rhods-deployer-cm.yaml 
+oc apply -f generated/hack-rhods-deployer-cm.yaml
+
+# redeploy - just in case
+oc apply -f k8s
 
 # check maximum effort
 diff -u dump/deployer/deploy.sh hacks/deploy.sh
