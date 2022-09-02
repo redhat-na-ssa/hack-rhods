@@ -32,6 +32,9 @@ oc apply -f generated/hack-rhods-deployer-cm.yaml
 # redeploy - just in case
 oc apply -f k8s
 
+# delete old operator
+oc -n redhat-ods-operator delete po -l name=rhods-operator
+
 # check maximum effort
 diff -u dump/deployer-v1.15.0-10/deploy.sh hacks/deploy.sh
 
