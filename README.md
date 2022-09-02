@@ -47,3 +47,4 @@ diff -u dump/deployer/deploy.sh hacks/deploy.sh
 
 ## Links
 - [GitHub - RHODS Operator](https://github.com/red-hat-data-services/opendatahub-operator)
+- [GitHub - RHODS Deployer](https://github.com/red-hat-data-services/odh-deployer)
