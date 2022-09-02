@@ -33,7 +33,7 @@ oc apply -f generated/hack-rhods-deployer-cm.yaml
 oc apply -f k8s
 
 # check maximum effort
-diff -u dump/deployer-v1.15.0-10/sdeploy.sh hacks/deploy.sh
+diff -u dump/deployer-v1.15.0-10/deploy.sh hacks/deploy.sh
 
 # Success!!!1
 ```
