@@ -147,6 +147,7 @@ then
 fi
 
 # NOTE: use ENV var to differentiate from DEV and PROD
+# TODO: cleanup SRE process
 if [[ "$(oc get route -n openshift-console console --template={{.spec.host}})" =~ .*"aisrhods".* ]]
 then
   echo "Cluster is for RHODS engineering or test purposes. Disabling SRE alerting."
@@ -197,8 +198,7 @@ oc create -n ${ODH_PROJECT} -f jupyterhub/jupyterhub-configmap.yaml || echo "INF
 infrastructure=$(oc get infrastructure cluster -o jsonpath='{.spec.platformSpec.type}')
 # Check if the installation target is AWS to determine the deployment manifest path
 
-# NOTES: Why use RDS - cloud agnostic
-
+# NOTES: Why use RDS vs posgres? - cloud agnostic
 if [ $infrastructure = "AWS" ]; then
   # On AWS OpenShift Dedicated, deploy with CRO
   echo "INFO: Deploying on AWS. Creating CRO for deployment of RDS Instance"
@@ -219,7 +219,7 @@ if [ $infrastructure = "AWS" ]; then
     exit 1
   fi
 
-  # NOTE: Kludge much? - Change in your git repo
+  # NOTE: change orig file in your git repo?
   sed -i '/tlsSkipVerify/d' monitoring/grafana/grafana-secrets.yaml
 
   # Give dedicated-admins group CRUD access to ConfigMaps, Secrets, ImageStreams, Builds and BuildConfigs in select namespaces
@@ -409,7 +409,8 @@ oc apply -f network/
 # Create the runtime buildchain if the rhods-buildchain configmap is missing,
 # otherwise recreate it if the stored hecksum does not match
 # NOTE: Why not use GitHub actions / CI instead of making the cluster build it?
-# NOTE: Chain building takes another 20+ mins to use RHODS - WHY?
+# NOTE: Chain building takes another 40+ mins to use RHODS - WHY?
+# TODO: Build containers in CI
 $HOME/buildchain.sh
 
 # TODO: move SRE config outside of deploy
