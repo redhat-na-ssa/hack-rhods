@@ -492,9 +492,6 @@ spec:
                       requests:
                         cpu: 50m
                         memory: 500Mi
-                imagePullSecrets:
-                  - name: addon-managed-odh-pullsecret
-                initContainers:
                   - command:
                       #- ./deploy.sh
                       - /bin/sh
@@ -525,6 +522,8 @@ spec:
                     name: hack-rhods-deployer
                     optional: true
                     defaultMode: 0755
+                imagePullSecrets:
+                  - name: addon-managed-odh-pullsecret
     strategy: deployment
   maintainers:
     - name: Red Hat

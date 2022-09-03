@@ -5,40 +5,11 @@ Q: How hard is it to make RHODS run any OpenShift Cluster?
 A: ...
 
 
-## Quickstart
-
-Note: Repeat commands if you see errors
-```
-oc apply -f k8s
-oc apply -k components/operators/rhods/operator/overlays/beta
-```
-
 ## Hacks
 
-Make RHODS hybrid cloud ready - run on any OCP
-```
-[ ! -e generated ] && mkdir generated
-
-# create our patched deploy script for the rhods operator
-oc --dry-run=client -o yaml \
-  -n redhat-ods-operator \
-  create configmap hack-rhods-deployer \
-  --from-file hacks/deploy.sh \
-  > generated/hack-rhods-deployer-cm.yaml
-
-# create a modified operator that uses our script
-oc apply -f generated/hack-rhods-deployer-cm.yaml
-
-# redeploy - just in case
-oc apply -f k8s
-
-# delete old operator
-oc -n redhat-ods-operator delete po -l name=rhods-operator
-
-# check maximum effort
-diff -u dump/deployer-v1.15.0-10/deploy.sh hacks/deploy.sh
-
-# Success!!!1
+Note: Repeat commands if you see errors
+``````
+hacks/run.sh
 ```
 
 ## Comments
