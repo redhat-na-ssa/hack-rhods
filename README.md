@@ -40,6 +40,7 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
     - Order of operation and scope issues for SRE logic
   - FIX: Use regular container for `deploy.sh`
 - `buildchain.sh` is **kludgee**
+  - Build configs resources very oversized (fix: 1 cpu, 2Gi)
   - Can NOT use JupyterHub for 40+ mins after deployment
   - Use declaritive methods
   - FIX: Build containers in CI and push to quay.io
