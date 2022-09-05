@@ -1,14 +1,19 @@
-# Hack RHODS
+# Make RHODS work on OpenShift
 
+## Origin Story
 Q: How hard is it to make RHODS run any OpenShift Cluster?
 
 A: ...
 
+The purpose of this repo is to understand how RHODS works and how much effort it takes to make RHODS work in other cloud providers (ex: ARO, baremetal). Currently RHODS is only available in ROSA (AWS).
+
+Disclaimer: The `make-things-work` method was applied here - YMMV, unsupported solution, godspeed, etc...
 
 ## Hacks
 
-Note: Repeat commands if you see errors
+Note: Repeat command if you see errors
 ```
+# run RHODS in an unsupported fashion = YES
 hacks/run.sh
 ```
 
@@ -27,6 +32,8 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
   - Script could be more modular
   - Create functions
   - Mixture of imparative and declaritive operations (pick declaritive)
+  - Do NOT Deploy `postgres` in RDS (AWS) - fragile
+    - FIX: Deploy `postgres` in OpenShift
   - Do NOT `exit 1`
     - The operator has NOT failed, the deployment failed
   - Do NOTHING vs `exit 1`
@@ -39,8 +46,14 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
   - FEATURE: Chain build with customizations - Create template for users?
 - No operator health checks
 
+## Opinions / Conclusions
+- It will be difficult to sell the value of RHODS vs ODH
+  - Customers will be buying an idea / relationship vs a solution
+- Give RHODS for free (until it's more valuable than ODH)
+- Sell ROSA (Give RHODS for free)
+- Downgrade operator channel to `alpha` OR Fix above issues
 
-
+ 
 ## Links
 - [GitHub - RHODS Operator](https://github.com/red-hat-data-services/opendatahub-operator)
 - [GitHub - RHODS Deployer](https://github.com/red-hat-data-services/odh-deployer)
