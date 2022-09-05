@@ -51,6 +51,7 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
   - Customers will be buying an idea / relationship vs a solution
 - Give RHODS for free (until it's more valuable than ODH)
 - Sell ROSA (Give RHODS for free)
+- RHODS Engineering features is slow
 - Downgrade operator channel to `alpha` OR Fix above issues
 
  
