@@ -199,7 +199,7 @@ infrastructure=$(oc get infrastructure cluster -o jsonpath='{.spec.platformSpec.
 # Check if the installation target is AWS to determine the deployment manifest path
 
 # NOTES: Why use RDS vs posgres? - cloud agnostic
-if [ $infrastructure = "AWS" ]; then
+if [ $infrastructure = "AWS-nope" ]; then
   # On AWS OpenShift Dedicated, deploy with CRO
   echo "INFO: Deploying on AWS. Creating CRO for deployment of RDS Instance"
   ODH_MANIFESTS="opendatahub-osd.yaml"
