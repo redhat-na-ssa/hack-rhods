@@ -8,13 +8,13 @@ delete_rhods(){
 
     # delete kfdefs
     oc -n $i \
-      delete kfdefs.kfdef.apps.kubeflow.org --all
+      delete kfdefs.kfdef.apps.kubeflow.org --wait=false --all
     sleep 1
 
     # delete kfdefs - forced
-    oc -n $i 
+    oc -n $i \
       get kfdefs.kfdef.apps.kubeflow.org \
-      -o json | jq '.items[].metadata.finalizers = null' | oc apply -f -  
+      -o json | jq '.items[].metadata.finalizers = null' | oc apply -f -
   done
 
   
@@ -24,7 +24,7 @@ delete_rhods(){
   ns_labeled=$(oc get ns -l opendatahub.io/generated-namespace -o name)
   oc delete ${ns_labeled}
 
-  ns=(redhat-ods-applications redhat-ods-monitoring rhods-notebooks redhat-ods-operator)
+  ns=(anonymous redhat-ods-applications redhat-ods-monitoring rhods-notebooks redhat-ods-operator)
   for i in "${ns[@]}"
   do
     oc delete ns $i  
