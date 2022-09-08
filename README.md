@@ -23,6 +23,16 @@ opm alpha bundle unpack quay.io/modh/rhods-bundle:v1.15.0-10
 opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
 ```
 
+## Summary
+
+- Limited to AWS, despite being easily deployable in other locations including ARO/ on-prem
+  - Alternatives work today with minor fixes
+- Does not use container registry. Re-builds container images on operator install.
+  - Customer cannot use JupyterHub for 40+ mins after deployment & incurs cost of building images
+- No operator health checks
+- Does not specify resources the Kubernetes way
+  - Does not use CRDs. Done imperatively, not declaratively
+
 ## Comments
 - Does this operator meet standards to be in the marketplace?
 - Operater install should NOT fail
@@ -55,7 +65,7 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
 - Features for RHODS come slowly
 - Downgrade operator channel to `alpha` OR Fix above issues
 
- 
+
 ## Links
 - [GitHub - RHODS Operator](https://github.com/red-hat-data-services/opendatahub-operator)
 - [GitHub - RHODS Deployer](https://github.com/red-hat-data-services/odh-deployer)
