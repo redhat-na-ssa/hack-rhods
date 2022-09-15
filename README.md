@@ -50,10 +50,8 @@ opm migrate quay.io/modh/qe-catalog-source:v1.15.0-10 -o yaml ./
 ## Opinions / Conclusions
 - It will be difficult to sell the value of RHODS vs ODH
   - Customers will be buying an idea / relationship vs a solution
-- Give RHODS for free (until it's more valuable than ODH)
-- Sell ROSA (Give RHODS for free)
 - Features for RHODS come slowly
-- Downgrade operator channel to `alpha` OR Fix above issues
+- Making RHODS work on on any OCP cluster would require removing AWS RDS dependency (effort minimal)
 
  
 ## Links
