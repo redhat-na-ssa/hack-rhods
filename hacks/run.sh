@@ -24,4 +24,4 @@ sleep 10
 
 # delete old operator deployment
 # oc -n redhat-ods-operator delete deployment rhods-operator
-oc -n redhat-ods-operator delete po -l name=rhods-operator
+oc -n redhat-ods-operator delete po,rs -l name=rhods-operator
