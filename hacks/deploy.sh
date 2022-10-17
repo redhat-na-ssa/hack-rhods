@@ -417,3 +417,7 @@ $HOME/buildchain.sh
 # NOTE: do SRE config after operator is up
 # NOTE: use an env var to avoid SRE setup
 [ -z ${DEVELOPMENT} ] && sre_config
+
+
+echo "my work is done..."
+sleep infinity
