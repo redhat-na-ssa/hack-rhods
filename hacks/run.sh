@@ -6,7 +6,7 @@
 oc apply -k components/operators/rhods/operator/overlays/beta
 
 # let things settle
-sleep 5
+sleep 30
 
 # create our patched deploy script for the rhods operator
 oc --dry-run=client -o yaml \
@@ -20,7 +20,7 @@ oc apply -f generated/hack-rhods-deployer-cm.yaml
 
 # hack rhods operator w/ configmap
 oc apply -f hacks
-sleep 5
+sleep 10
 
 # delete old operator deployment
 # oc -n redhat-ods-operator delete deployment rhods-operator
